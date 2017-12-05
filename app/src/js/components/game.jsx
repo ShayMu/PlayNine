@@ -29,20 +29,22 @@ class Game extends React.Component{
     };
 
     render() {
+        const { selectedNumbers, numOfStars } = this.state;
+
         return (
             <div className="container">
                 <h3>Play Nine</h3>
                 <hr />
                 <div className="row">
-                    <Stars numOfStars={this.state.numOfStars} />
-                    <CheckAnswerBtn />
+                    <Stars numOfStars={numOfStars} />
+                    <CheckAnswerBtn selectedNumbers={selectedNumbers} />
                     <AnswerSection
-                        selectedNumbers={this.state.selectedNumbers}
+                        selectedNumbers={selectedNumbers}
                         handleUnselectNumber={this.unselectNumber} />
                 </div>
                 <br />
                 <Numbers
-                    selectedNumbers={this.state.selectedNumbers}
+                    selectedNumbers={selectedNumbers}
                     selectNumberFunc={this.selectNumber} />
             </div>
         )
