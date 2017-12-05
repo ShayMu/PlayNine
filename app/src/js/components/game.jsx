@@ -4,21 +4,29 @@ import AnswerSection from './answerSection';
 import CheckAnswerBtn from './checkAnswerBtn';
 import Numbers from './numbers';
 
-const Game = (props) => {
+class Game extends React.Component{
+    constructor(props) {
+        super(props);
 
-    return (
-        <div className="container">
-            <h3>Play Nine</h3>
-            <hr />
+        this.state = {
+            selectedNumbers: []
+        };
+    }
+    render() {
+        return (
+            <div className="container">
+                <h3>Play Nine</h3>
+                <hr />
                 <div className="row">
                     <Stars />
                     <CheckAnswerBtn />
-                    <AnswerSection />
+                    <AnswerSection selectedNumbers={this.state.selectedNumbers} />
                 </div>
-            <br />
-            <Numbers />
-        </div>
-    );
+                <br />
+                <Numbers selectedNumbers={this.state.selectedNumbers} />
+            </div>
+        )
+    }
 };
 
 export default Game;
