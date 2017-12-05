@@ -4,9 +4,9 @@ const Numbers = (props) => {
     return (
         <div className="card text-center">
             <div>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
+                <span className="number-display">1</span>
+                <span className="number-display selected">2</span>
+                <span className="number-display used">3</span>
             </div>
         </div>
     );
