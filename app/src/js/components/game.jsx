@@ -9,21 +9,33 @@ class Game extends React.Component{
         super(props);
 
         this.state = {
+            numOfStars: 1 + Math.floor(Math.random() * 9),
             selectedNumbers: []
         };
     }
+
+
+    selectNumber = (number) => {
+        this.setState((prevState) => ({
+            selectedNumbers: prevState.selectedNumbers.concat(number)
+        }));
+
+    };
+
     render() {
         return (
             <div className="container">
                 <h3>Play Nine</h3>
                 <hr />
                 <div className="row">
-                    <Stars />
+                    <Stars numOfStars={this.state.numOfStars} />
                     <CheckAnswerBtn />
                     <AnswerSection selectedNumbers={this.state.selectedNumbers} />
                 </div>
                 <br />
-                <Numbers selectedNumbers={this.state.selectedNumbers} />
+                <Numbers
+                    selectedNumbers={this.state.selectedNumbers}
+                    selectNumberFunc={this.selectNumber} />
             </div>
         )
     }

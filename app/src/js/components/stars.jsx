@@ -1,11 +1,9 @@
 import React from 'react';
 
 const Stars = (props) => {
-    const numOfStars = 1 + Math.floor(Math.random() * 9);
-
     return (
         <div className="col-5">
-            {Array.from(Array(numOfStars), (e, i) => i + 1).map((i) =>
+            {Array.from(Array(props.numOfStars), (e, i) => i + 1).map((i) =>
                 <i key={i} className="fa fa-star"></i>)}
         </div>
     );
