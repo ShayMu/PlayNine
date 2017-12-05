@@ -22,6 +22,12 @@ class Game extends React.Component{
 
     };
 
+    unselectNumber = (number) => {
+        this.setState((prevState) => ({
+            selectedNumbers: prevState.selectedNumbers.filter((value) => value !== number)
+        }));
+    };
+
     render() {
         return (
             <div className="container">
@@ -30,7 +36,9 @@ class Game extends React.Component{
                 <div className="row">
                     <Stars numOfStars={this.state.numOfStars} />
                     <CheckAnswerBtn />
-                    <AnswerSection selectedNumbers={this.state.selectedNumbers} />
+                    <AnswerSection
+                        selectedNumbers={this.state.selectedNumbers}
+                        handleUnselectNumber={this.unselectNumber} />
                 </div>
                 <br />
                 <Numbers
