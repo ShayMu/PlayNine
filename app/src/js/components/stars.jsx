@@ -5,7 +5,7 @@ const Stars = (props) => {
 
     return (
         <div className="col-5">
-            {Array.from(Array(numOfStars)).map(i =>
+            {Array.from(Array(numOfStars), (e, i) => i + 1).map((i) =>
                 <i key={i} className="fa fa-star"></i>)}
         </div>
     );
