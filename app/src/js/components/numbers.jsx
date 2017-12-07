@@ -4,12 +4,15 @@ import React from 'react';
 const Numbers = (props) => {
 
     const getClassName = (number) => {
-        return 'number-display ' + ((props.selectedNumbers.indexOf(number) >= 0) ? 'selected' : '');
+        return ('number-display ' +
+            ((props.selectedNumbers.indexOf(number) >= 0) ? 'selected' : '') +
+            ((props.usedNumbers.indexOf(number) >= 0) ? 'used' : ''));
     };
 
     const handleNumberClick = (event) => {
         let number = parseInt(event.target.innerHTML, 10);
-        if (props.selectedNumbers.indexOf(number) < 0)
+        if (props.selectedNumbers.indexOf(number) < 0 &&
+            props.usedNumbers.indexOf(number) < 0)
             props.selectNumberFunc(number);
     };
 
