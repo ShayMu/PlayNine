@@ -3,6 +3,7 @@ import Stars from './stars';
 import AnswerSection from './answerSection';
 import CheckAnswerBtn from './checkAnswerBtn';
 import Numbers from './numbers';
+import RedrawButton from './redrawBtn';
 
 class Game extends React.Component{
     constructor(props) {
@@ -12,7 +13,8 @@ class Game extends React.Component{
             numOfStars: this.calculateNewNumOfStars(),
             usedNumbers: [],
             selectedNumbers: [],
-            isCorrectAnswer: null
+            isCorrectAnswer: null,
+            redrawCount: 5
         };
     }
 
@@ -46,6 +48,13 @@ class Game extends React.Component{
         });
     };
 
+    handleRedraw = () => {
+        this.setState((prevState) => ({
+            redrawCount: prevState.redrawCount - 1,
+            numOfStars: this.calculateNewNumOfStars()
+        }));
+    };
+
     acceptAnswer = () => {
         this.setState((prevState) => ({
             usedNumbers: prevState.usedNumbers.concat(prevState.selectedNumbers),
@@ -55,7 +64,7 @@ class Game extends React.Component{
     };
 
     render() {
-        const { selectedNumbers, numOfStars, isCorrectAnswer, usedNumbers } = this.state;
+        const { selectedNumbers, numOfStars, isCorrectAnswer, usedNumbers, redrawCount } = this.state;
 
         return (
             <div className="container">
@@ -71,6 +80,10 @@ class Game extends React.Component{
                         selectedNumbers={selectedNumbers}
                         handleUnselectNumber={this.unselectNumber} />
                 </div>
+                <br />
+                <RedrawButton
+                    redrawCount={redrawCount}
+                    handleRedraw={this.handleRedraw} />
                 <br />
                 <Numbers
                     selectedNumbers={selectedNumbers}
