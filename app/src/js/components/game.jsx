@@ -4,12 +4,15 @@ import AnswerSection from './answerSection';
 import CheckAnswerBtn from './checkAnswerBtn';
 import Numbers from './numbers';
 import DoneFrame from './doneFrame';
+import Timer from './timer';
 
 class Game extends React.Component{
     constructor(props) {
         super(props);
 
         this.state = this.initialState();
+
+        setInterval(this.updateTimer, 1000);
     }
 
     initialState = () => {
@@ -19,7 +22,8 @@ class Game extends React.Component{
             selectedNumbers: [],
             isCorrectAnswer: null,
             redrawCount: 5,
-            doneStatus: null
+            doneStatus: null,
+            timeLeft: 60
         };
     };
 
@@ -90,6 +94,19 @@ class Game extends React.Component{
         });
     };
 
+    updateTimer = () => {
+
+        this.setState((prevState) => {
+
+            if (prevState.doneStatus === null) {
+                if (prevState.timeLeft > 0)
+                    return { timeLeft: prevState.timeLeft - 1 };
+                else
+                    return { doneStatus: "Time is Up!" };
+            }
+        });
+    };
+
     hasPossibleSolution = ({ numOfStars, usedNumbers }) => {
         const currNumbers = Array.from(Array(9), (e, i) => i + 1).filter((num) => usedNumbers.indexOf(num) === -1);
 
@@ -115,12 +132,14 @@ class Game extends React.Component{
     };
 
     render() {
-        const { selectedNumbers, numOfStars, isCorrectAnswer, usedNumbers, redrawCount, doneStatus } = this.state;
+        const { selectedNumbers, numOfStars, isCorrectAnswer, usedNumbers, redrawCount, doneStatus, timeLeft } = this.state;
 
         return (
             <div className="container">
                 <h3>Play Nine</h3>
                 <hr />
+                <Timer timeLeft={timeLeft} />
+                <br />
                 <div className="row">
                     <Stars numOfStars={numOfStars} />
                     <CheckAnswerBtn
