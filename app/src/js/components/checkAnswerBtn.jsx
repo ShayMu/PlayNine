@@ -1,4 +1,5 @@
 import React from 'react';
+import RedrawButton from './redrawBtn';
 
 const CheckAnswerButton = (props) => {
 
@@ -31,8 +32,12 @@ const CheckAnswerButton = (props) => {
 
 
     return (
-        <div className="col-2">
+        <div className="col-2 text-center">
             {button}
+            <br /><br/>
+            <RedrawButton
+                redrawCount={props.redrawCount}
+                handleRedraw={props.handleRedraw} />
         </div>
     );
 };
